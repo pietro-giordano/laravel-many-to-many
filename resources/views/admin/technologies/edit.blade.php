@@ -21,7 +21,7 @@
                         @method('PUT')
 
                         <div class="mb-3">
-                              <label for="name" class="form-label">Nome tipologia *</label>
+                              <label for="name" class="form-label">Nome tecnologia *</label>
                               <input type="text" class="form-control" id="name" name="name" value="{{ old('name'), $type->name }}" placeholder="Inserisci il nome nuova tecnologia..." required maxlength="64">
                         </div>
 

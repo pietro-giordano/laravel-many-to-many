@@ -20,6 +20,22 @@
                         @endif
                   </h4>
 
+                  <h4>Tecnologia: 
+                        @if ($project->technologies)
+                              <ul>
+                                    @foreach ($project->technologies as $tech)
+                                          <li>
+                                                <a href="{{ route('admin.technologies.show', $tech->id) }}">
+                                                      {{ $tech->name }}
+                                                </a>
+                                          </li>
+                                    @endforeach
+                              </ul>
+                        @else
+                              Nessuna tecnologia
+                        @endif
+                  </h4>
+
                   <p>{{ $project->description }}</p>
 
                   @if ($project->image)

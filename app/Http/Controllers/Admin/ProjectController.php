@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 // Mails
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewProject;
+use App\Models\Technology;
 
 class ProjectController extends Controller
 {
@@ -36,7 +37,8 @@ class ProjectController extends Controller
       public function create()
       {
             $types = Type::all();
-            return view('admin.projects.create', compact('types'));
+            $technologies = Technology::all();
+            return view('admin.projects.create', compact('types', 'technologies'));
       }
 
       /**
@@ -56,6 +58,10 @@ class ProjectController extends Controller
             }
 
             $newProject = Project::create($data);
+
+            foreach ($data['technologies'] as $techId) {
+                  $newProject->technologies()->attach($techId);
+            }
 
             Mail::to('hello@example.com')->send(new NewProject($newProject));
 
@@ -82,7 +88,8 @@ class ProjectController extends Controller
       public function edit(Project $project)
       {
             $types = Type::all();
-            return view('admin.projects.edit', compact('project', 'types'));
+            $technologies = Technology::all();
+            return view('admin.projects.edit', compact('project', 'types', 'technologies'));
       }
 
       /**
