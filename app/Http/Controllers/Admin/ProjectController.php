@@ -59,8 +59,11 @@ class ProjectController extends Controller
 
             $newProject = Project::create($data);
 
-            foreach ($data['technologies'] as $techId) {
-                  $newProject->technologies()->attach($techId);
+            if (array_key_exists('technologies', $data)) {
+                  foreach ($data['technologies'] as $techId) {
+                        $newProject->technologies()->attach($techId);
+                  }
+                  // alternativamente si può usare anche qui il sync come con update
             }
 
             Mail::to('hello@example.com')->send(new NewProject($newProject));
@@ -120,6 +123,13 @@ class ProjectController extends Controller
             }
 
             $project->update($data);
+
+            if (array_key_exists('technologies', $data)) {
+                  $project->technologies()->sync($data['technologies']);
+            } else {
+                  $project->technologies()->detach();
+            }
+
             return redirect()->route('admin.projects.show', $project->id)->with('success', 'Progetto aggiornato con successo');
       }
 

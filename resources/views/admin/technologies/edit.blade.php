@@ -15,14 +15,14 @@
 
       <div class="row mb-4">
             <div class="col">
-                  <form action="{{ route('admin.technologies.update', $type->id) }}" method="POST">
+                  <form action="{{ route('admin.technologies.update', $technology->id) }}" method="POST">
                         @csrf
 
                         @method('PUT')
 
                         <div class="mb-3">
                               <label for="name" class="form-label">Nome tecnologia *</label>
-                              <input type="text" class="form-control" id="name" name="name" value="{{ old('name'), $type->name }}" placeholder="Inserisci il nome nuova tecnologia..." required maxlength="64">
+                              <input type="text" class="form-control" id="name" name="name" value="{{ old('name'), $technology->name }}" placeholder="Inserisci il nome nuova tecnologia..." required maxlength="64">
                         </div>
 
                         <p>I campi contrassegnati con * sono obbligatori</p>
